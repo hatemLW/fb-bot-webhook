@@ -11,6 +11,7 @@ app.set('page_access_token', (process.env.PAGE_ACCESS_TOKEN || 'NULL'));
 
 app.get('/', function (req, res) {
         res.send('It Works! Follow FB Instructions to activate.');
+        console.log('new request!');
 });
 
 app.get('/webhook', function (req, res) {
@@ -22,6 +23,7 @@ app.get('/webhook', function (req, res) {
 });
 
 app.post('/webhook/', function (req, res) {
+        console.log('new msg!');
     console.log (req.body);
     messaging_events = req.body.entry[0].messaging;
     for (i = 0; i < messaging_events.length; i++) {
@@ -29,8 +31,9 @@ app.post('/webhook/', function (req, res) {
         sender = event.sender.id;
         if (event.message && event.message.text) {
             text = event.message.text;
+                console.log('msg = '+text);
             // Your Logic Replaces the following Line
-            sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+            //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
         }
     }
     res.sendStatus(200);
