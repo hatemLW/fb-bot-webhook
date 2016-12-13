@@ -41,16 +41,16 @@ app.post('/webhook/', function (req, res) {
 
 function sendTextMessage(sender, text) {
         
-        var reply='';
+        var reply="";
         text=text.toString().trim();
-        if(text === 'hi')
-        {  reply='Welcome!';}
-        else if(text === 'help')
-        {reply='At your service!';}
-        else if(text === 'test')
-        {        reply='Under construction!';}
-        else if(text === 'bye')
-        {reply='Have a nice day!';}
+        if(text.toString().trim() === "hi")
+        {  reply="Welcome!";}
+        else if(text.toString().trim() === "help")
+        {reply="At your service!";}
+        else if(text.toString().trim() === "test")
+        {        reply="Under construction!";}
+        else if(text.toString().trim() === "bye")
+        {reply="Have a nice day!";}
         else
         {reply='Unknown command! try ( hi, help, test, or bye).';}
         
