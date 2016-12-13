@@ -42,6 +42,7 @@ app.post('/webhook/', function (req, res) {
 function sendTextMessage(sender, text) {
         
         var reply='';
+        text=text.toString().trim();
         if(text === 'hi')
         {  reply='Welcome!';}
         else if(text === 'help')
