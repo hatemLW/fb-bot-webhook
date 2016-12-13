@@ -33,7 +33,8 @@ app.post('/webhook/', function (req, res) {
             text = event.message.text;
                 console.log('msg = '+text);
             // Your Logic Replaces the following Line
-            sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+            //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+            sendTextMessage(sender,  text.substring(0, 200));
         }
     }
     res.sendStatus(200);
