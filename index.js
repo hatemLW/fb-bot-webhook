@@ -43,15 +43,15 @@ function sendTextMessage(sender, text) {
         
         var reply='';
         if(text === 'hi')
-                reply='Welcome!';
+        {  reply='Welcome!';}
         else if(text === 'help')
-                reply='At your service!';
+        {reply='At your service!';}
         else if(text === 'test')
-                reply='Under construction!';
+        {        reply='Under construction!';}
         else if(text === 'bye')
-                reply='Have a nice day!';
+        {reply='Have a nice day!';}
         else
-                reply='Unknown command! try ( hi, help, test, or bye).';
+        {reply='Unknown command! try ( hi, help, test, or bye).';}
         
     messageData = {
         text:reply
