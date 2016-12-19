@@ -5,9 +5,9 @@ var request = require('request');
 
 app.use(bodyParser.json());
 
-app.set('port', (process.env.PORT || 5000));
-app.set('verify_token', (process.env.VERIFY_TOKEN || 'TEST'));
-app.set('page_access_token', (process.env.PAGE_ACCESS_TOKEN || 'NULL'));
+app.set('port', (process.env.APPSETTING_PORT || 5000));
+app.set('verify_token', (process.env.APPSETTING_VERIFY_TOKEN || 'TEST'));
+app.set('page_access_token', (process.env.APPSETTING_PAGE_ACCESS_TOKEN || 'NULL'));
 
 app.get('/', function (req, res) {
         res.send('It Works! Follow FB Instructions to activate.');
