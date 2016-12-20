@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 //app.set('port',  5000);
 //app.set('verify_token', 'TEST');
 //app.set('page_access_token', ('EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itWtBAAlTVdb8vaPQU7WXnV7Pgw41iZCvUw0nJv6lZA4JV2j1bvpZBxZBkSApXZA0fJ0gS3ckLZAS5MXIFXOKLyakZCXK2FRYacMZC139NYY5Ncfo6ZAoVEyvZALTY1XF3lF2ZCU'));
-var FB_PORT = 5000;
+//var FB_PORT = 5000;
 //app.set('port', (FB_PORT || 5000));
 
 app.set('port', (process.env.PORT || 5000));
