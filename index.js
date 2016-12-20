@@ -12,10 +12,15 @@ app.use(bodyParser.json());
 //app.set('port',  5000);
 //app.set('verify_token', 'TEST');
 //app.set('page_access_token', ('EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itWtBAAlTVdb8vaPQU7WXnV7Pgw41iZCvUw0nJv6lZA4JV2j1bvpZBxZBkSApXZA0fJ0gS3ckLZAS5MXIFXOKLyakZCXK2FRYacMZC139NYY5Ncfo6ZAoVEyvZALTY1XF3lF2ZCU'));
+var FB_PORT = 5000;
+app.set('port', (FB_PORT || 5000));
 
-app.set('port', (process.env.PORT || 5000));
-app.set('verify_token', (process.env.VERIFY_TOKEN || 'TEST'));
-app.set('page_access_token', (process.env.PAGE_ACCESS_TOKEN || 'NULL'));
+//app.set('port', (process.env.PORT || 5000));
+//app.set('verify_token', (process.env.VERIFY_TOKEN || 'TEST'));
+//app.set('page_access_token', (process.env.PAGE_ACCESS_TOKEN || 'NULL'));
+
+
+var PAGE_ACCESS_TOKEN = 'EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itWtBAAlTVdb8vaPQU7WXnV7Pgw41iZCvUw0nJv6lZA4JV2j1bvpZBxZBkSApXZA0fJ0gS3ckLZAS5MXIFXOKLyakZCXK2FRYacMZC139NYY5Ncfo6ZAoVEyvZALTY1XF3lF2ZCU';
 
 
 app.get('/', function (req, res) {
@@ -24,7 +29,8 @@ app.get('/', function (req, res) {
 });
 
 app.get('/webhook', function (req, res) {
-    if (req.query['hub.verify_token'] === app.get('verify_token')) {
+        //if (req.query['hub.verify_token'] === app.get('verify_token')) {
+        if (req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {           
         res.send(req.query['hub.challenge']);
     } else {
         res.send('Error, wrong validation token');
@@ -71,7 +77,7 @@ function sendTextMessage(sender, text) {
     }
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:app.get('page_access_token')},
+        qs: {access_token:PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
             recipient: {id:sender},
@@ -86,8 +92,8 @@ function sendTextMessage(sender, text) {
     });
 }
 
-app.listen(app.get('port'), function() {
-    console.log('Node app is running on port', app.get('port'));
+app.listen(FB_PORT, function() {
+    console.log('Node app is running on port', FB_PORT);
 });
 
 app.post('/webhook', function (req, res) {
