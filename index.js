@@ -38,9 +38,9 @@ app.get('/webhook', function (req, res) {
 });
 
 app.post('/webhook/', function (req, res) {
-        console.log('new msg!');
+      //  console.log('new msg!');
         
-     console.log(req.body);
+    // console.log(req.body);
          if(req.body.entry[0].messaging){
                 // console.log('messaging_events:...');
     messaging_events = req.body.entry[0].messaging;
@@ -50,17 +50,33 @@ app.post('/webhook/', function (req, res) {
                 sender = event.sender.id;
                 if (event.message && event.message.text) {
                     text = event.message.text;
-                        console.log('msg = '+text);
+                        console.log('New message = '+text);
                     // Your Logic Replaces the following Line
                     //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
-                    sendTextMessage(sender,  text.substring(0, 200));
+                    sendTextMessage(sender,  text.substring(0, 200)); 
                 }
                    // if(event)
                    //    console.log (event.toString());
             }
         }
         else if(req.body.entry[0].changes){
-                console.log(JSON.stringify(req.body.entry[0].changes));
+                page_changes=req.body.entry[0].changes;
+                //console.log(JSON.stringify(page_changes));
+                 for (i = 0; i < page_changes.length; i++) {
+                change_field = page_changes[i].field;
+                change_value = page_changes[i].value;
+                if (change_value  && change_value.item  && change_value.message  && change_value.sender_name  ) {
+                   
+                        console.log('New ' + change_value.item + ' =' + change_value.message);
+                         console.log('from ' + change_value.sender_name);
+                    // Your Logic Replaces the following Line
+                    //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+                   // sendTextMessage(sender,  text.substring(0, 200));
+                }
+                   // if(event)
+                   //    console.log (event.toString());
+            }
+               
         }
                 
                 
@@ -138,5 +154,5 @@ app.post('/webhook', function (req, res) {
   
 function receivedMessage(event) {
   // Putting a stub for now, we'll expand it in the following steps
-  console.log("Message data: ", event.message);
+  //console.log("Message data: ", event.message);
 }
