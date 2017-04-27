@@ -59,6 +59,11 @@ app.post('/webhook/', function (req, res) {
                    //    console.log (event.toString());
             }
         }
+        else if(req.body.entry[0].changes){
+                console.log(JSON.stringify(req.body.entry[0].changes));
+        }
+                
+                
     res.sendStatus(200);
 });
 
