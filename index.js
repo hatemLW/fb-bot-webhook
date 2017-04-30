@@ -147,7 +147,7 @@ function sendTextComment(object_id, text) {
     }
     request({
         //url: 'https://graph.facebook.com/v2.6/'+ object_id +'/comments',
-        url: 'https://graph.facebook.com/v2.6/feed',
+        url: 'https://graph.facebook.com/v2.6/me/feed',
         qs: {access_token:PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
