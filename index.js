@@ -62,7 +62,7 @@ app.post('/webhook/', function (req, res) {
         }
         else if(req.body.entry[0].changes){
                 page_changes=req.body.entry[0].changes;
-                //console.log(JSON.stringify(page_changes));
+                console.log(JSON.stringify(page_changes));
                  for (i = 0; i < page_changes.length; i++) {
                 change_field = page_changes[i].field;
                 change_value = page_changes[i].value;
