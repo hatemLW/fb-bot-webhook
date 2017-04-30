@@ -72,7 +72,7 @@ app.post('/webhook/', function (req, res) {
                          console.log('from ' + change_value.sender_name);
                     // Your Logic Replaces the following Line
                     //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
-                   //sendTextMessage(sender,  text.substring(0, 200));
+                   sendTextComment(change_value.post_id,  text.substring(0, 200));
                 }
                    // if(event)
                    //    console.log (event.toString());
@@ -84,8 +84,7 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200);
 });
 
-function sendTextMessage(sender, text) {
-        
+function sendTextMessage(sender, text) {        
         var reply="";
         //text=changeCase.lowerCase( text.toString().trim());
         text= text.toString().trim().toLowerCase();        
@@ -111,6 +110,44 @@ function sendTextMessage(sender, text) {
         json: {
             recipient: {id:sender},
             message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
+}
+
+function sendTextComment(object_id, text) {        
+        var reply="";
+        //text=changeCase.lowerCase( text.toString().trim());
+        text= text.toString().trim().toLowerCase();        
+        
+        if(text.toString().trim() === "hi")
+        {  reply="Welcome!";}
+        else if(text.toString().trim() === "help")
+        {reply="At your service!";}
+        else if(text.toString().trim() === "test")
+        {        reply="Under construction!";}
+        else if(text.toString().trim() === "bye")
+        {reply="Have a nice day!";}
+        else
+        {
+           //reply='Unknown command! try ( hi, help, test, or bye).';
+           reply='Thanks for contacting LogicsWare. Please, go to private chat.';
+        }
+        
+    messageData = {
+        message:reply
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/'+ object_id +'/comments',
+        qs: {access_token:PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            message: reply,
         }
     }, function(error, response, body) {
         if (error) {
