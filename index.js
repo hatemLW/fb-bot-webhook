@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
+var changeCase = require('change-case');
 
 app.use(bodyParser.json());
 
@@ -86,7 +87,7 @@ app.post('/webhook/', function (req, res) {
 function sendTextMessage(sender, text) {
         
         var reply="";
-        text=text.toString().trim();
+        text=changeCase.lowerCase( text.toString().trim());
         if(text.toString().trim() === "hi")
         {  reply="Welcome!";}
         else if(text.toString().trim() === "help")
