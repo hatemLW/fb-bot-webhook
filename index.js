@@ -22,6 +22,9 @@ app.set('page_access_token', (process.env.PAGE_ACCESS_TOKEN || 'NULL'));
 
 
 var PAGE_ACCESS_TOKEN = 'EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itWtBAAlTVdb8vaPQU7WXnV7Pgw41iZCvUw0nJv6lZA4JV2j1bvpZBxZBkSApXZA0fJ0gS3ckLZAS5MXIFXOKLyakZCXK2FRYacMZC139NYY5Ncfo6ZAoVEyvZALTY1XF3lF2ZCU';
+var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFoEZCWFpKvRAhFoqZAZC9cD4BfLjHAU603wBBtq0b4D7UT7ZBkIyH732vDf54ZCCmV1KuSb3bO9BvLuAGeKxj75lrYlk7v5KhkkiBtq2hFTkZD';
+var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
+
 
 
 app.get('/', function (req, res) {
@@ -144,7 +147,7 @@ function sendTextComment(object_id, text) {
     }
     request({
         url: 'https://graph.facebook.com/v2.6/'+ object_id +'/comments',
-        qs: {access_token:PAGE_ACCESS_TOKEN},
+        qs: {access_token:PAGE_ACCESS_TOKEN3},
         method: 'POST',
         json: {
             message: reply,
