@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 //const express = require('express');
 //var SocketServer = require('ws').Server;
