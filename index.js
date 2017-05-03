@@ -75,7 +75,8 @@ app.post('/webhook/', function (req, res) {
                          console.log('from ' + change_value.sender_name);
                     // Your Logic Replaces the following Line
                     //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
-                   sendTextComment(change_value.post_id,  change_value.message.substring(0, 200));
+                  // sendTextComment(change_value.post_id,  change_value.message.substring(0, 200));
+                        sendTextMessage(change_value.sender_id,  change_value.message.substring(0, 200));
                 }
                    // if(event)
                    //    console.log (event.toString());
