@@ -21,7 +21,7 @@ var server = http.createServer(app); // WS
 console.log("http server listening on %d", port) // WS
 server.listen(port); // WS
 
-wss.on("connection", function(ws) {
+WebSocketServer.on("connection", function(ws) {
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
   }, 1000)
