@@ -15,13 +15,13 @@ var request = require('request');
 app.use(bodyParser.json());
 
 
-var port = process.env.PORT || 5555; // WS
+var port =  5551; // WS
 app.use(express.static(__dirname + "/")); // WS
 var server = http.createServer(app); // WS
-//server.listen(port); // WS
+console.log("http server listening on %d", port) // WS
+server.listen(port); // WS
 
-/*console.log("http server listening on %d", port) // WS
-wss.on("connection", function(ws) {
+/*wss.on("connection", function(ws) {
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
   }, 1000)
