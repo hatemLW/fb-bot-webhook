@@ -18,10 +18,13 @@ app.use(bodyParser.json());
 var port =  5551; // WS
 app.use(express.static(__dirname + "/")); // WS
 var server = http.createServer(app); // WS
-console.log("http server listening on %d", port) // WS
+console.log("http server creating on %d", port) // WS
 server.listen(port); // WS
 
-WebSocketServer.on("connection", function(ws) {
+var wss = new WebSocketServer({server: server}); // WS
+console.log("websocket server created"); // WS
+
+wss.on("connection", function(ws) {
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
   }, 1000)
