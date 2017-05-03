@@ -2,7 +2,7 @@
 //var WebSocketServer = require("ws").server
 //var socketIO = require('socket.io');
 //const express = require('express');
-//var SocketServer = require('ws').Server;
+var SocketServer = require('ws').Server;
 var path = require('path');
 
 var express = require('express');
