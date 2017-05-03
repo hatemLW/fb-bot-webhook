@@ -21,7 +21,7 @@ var server = http.createServer(app); // WS
 console.log("http server listening on %d", port) // WS
 server.listen(port); // WS
 
-/*wss.on("connection", function(ws) {
+wss.on("connection", function(ws) {
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
   }, 1000)
@@ -32,7 +32,7 @@ server.listen(port); // WS
     console.log("websocket connection close")
     clearInterval(id)
   })
-})*/// WS
+});// WS
 
 //app.set('port', (process.env.APPSETTING_PORT || 5000));
 //app.set('verify_token', (process.env.APPSETTING_VERIFY_TOKEN || 'TEST'));
