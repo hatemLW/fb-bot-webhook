@@ -2,8 +2,9 @@
 //var WebSocketServer = require("ws").server
 //var socketIO = require('socket.io');
 //const express = require('express');
-var SocketServer = require('ws').Server;
-var path = require('path');
+var WebSocketServer = require("ws").Server; // WS
+var http = require("http"); // WS
+var path = require('path'); // WS
 
 var express = require('express');
 var app = express();
@@ -12,6 +13,26 @@ var request = require('request');
 //var changeCase = require('change-case');
 
 app.use(bodyParser.json());
+
+
+var port = process.env.PORT || 5555 // WS
+app.use(express.static(__dirname + "/")) // WS
+var server = http.createServer(app) // WS
+server.listen(port) // WS
+
+console.log("http server listening on %d", port) // WS
+wss.on("connection", function(ws) {
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function() {  })
+  }, 1000)
+
+  console.log("websocket connection open")
+
+  ws.on("close", function() {
+    console.log("websocket connection close")
+    clearInterval(id)
+  })
+})// WS
 
 //app.set('port', (process.env.APPSETTING_PORT || 5000));
 //app.set('verify_token', (process.env.APPSETTING_VERIFY_TOKEN || 'TEST'));
