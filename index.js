@@ -103,7 +103,7 @@ function sendTextMessage(sender, text) {
         {reply="Have a nice day!";}
         else
         {reply='Unknown command! try ( hi, help, test, or bye).';}
-        
+        console.log('sendTextMessage: ' + sender + ' , ' + reply);
     messageData = {
         text:reply
     }
