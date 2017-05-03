@@ -20,7 +20,7 @@ app.use(express.static(__dirname + "/")) // WS
 var server = http.createServer(app) // WS
 server.listen(port) // WS
 
-console.log("http server listening on %d", port) // WS
+/*console.log("http server listening on %d", port) // WS
 wss.on("connection", function(ws) {
   var id = setInterval(function() {
     ws.send(JSON.stringify(new Date()), function() {  })
@@ -32,7 +32,7 @@ wss.on("connection", function(ws) {
     console.log("websocket connection close")
     clearInterval(id)
   })
-})// WS
+})*/// WS
 
 //app.set('port', (process.env.APPSETTING_PORT || 5000));
 //app.set('verify_token', (process.env.APPSETTING_VERIFY_TOKEN || 'TEST'));
