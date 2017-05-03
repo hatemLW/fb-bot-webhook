@@ -1,3 +1,9 @@
+'use strict';
+
+//const express = require('express');
+const SocketServer = require('ws').Server;
+const path = require('path');
+
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
