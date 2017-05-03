@@ -1,6 +1,6 @@
 'use strict';
-
-var socketIO = require('socket.io');
+var WebSocketServer = require("ws").Server
+//var socketIO = require('socket.io');
 //const express = require('express');
 //var SocketServer = require('ws').Server;
 var path = require('path');
