@@ -1,8 +1,8 @@
 'use strict';
 
 //const express = require('express');
-const SocketServer = require('ws').Server;
-const path = require('path');
+var SocketServer = require('ws').Server;
+var path = require('path');
 
 var express = require('express');
 var app = express();
