@@ -1,6 +1,6 @@
 
 var http = require("http"); // WS
-
+var port=3333;
 var express = require('express');
 //var io = require('socket.io');
 const path = require('path');
@@ -25,22 +25,34 @@ app.get('/', function (req, res) {
 });
 
 // Expose the node_modules folder as static resources (to access socket.io.js in the browser)
-app.use('/static', express.static('node_modules'));
+//app.use('/static', express.static('node_modules'));
+app.use(express.static(__dirname + '/public'));
+
+var io = require('socket.io').listen(app.listen(port));
+
+io.sockets.on('connection', function (socket) {
+    socket.emit('message', { message: 'welcome to the chat' });
+    socket.on('send', function (data) {
+        io.sockets.emit('message', data);
+    });
+});
+
+//app.listen(3333);
 
 //var server = require('http').Server(app);
 //var io = require('socket.io').listen(server);
-var server = http.createServer(app);
+//var server = http.createServer(app);
 //var server = require('http').createServer(app);  
-var io = require('socket.io').listen(server);
+//var io = require('socket.io').listen(server);
 
-server.listen(80);
-
+//server.listen(80);
+/*
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
     console.log(data);
   });
-});
+});*/
 
 app.get('/webhook', function (req, res) {
         //if (req.query['hub.verify_token'] === app.get('verify_token')) {
