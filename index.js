@@ -88,16 +88,19 @@ var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFo
 var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
 
 
-/*
+
 app.get('/', function (req, res) {
-        res.send('It Works! Follow FB Instructions to activate.');
-        console.log('new request!');
+        //res.send('It Works! Follow FB Instructions to activate.');
+	res.send(
+	"<html><body><p id='server-time'></p><script>	console.log(location.origin);var HOST = location.origin.replace(/^http/, 'ws');	  console.log(HOST);  var el = document.getElementById('server-time');      ws.onmessage = function (event) {        el.innerHTML = 'Server time: ' + event.data;      };    </script>  </body></html>";
+        );
+	console.log('new request!');
 	var host = req.get('host');
   console.log(host);
 	var origin = req.get('origin');
  // var HOST = location.origin.replace(/^http/, 'ws');
 	  console.log(origin);
-});*/
+});
 
 app.get('/webhook', function (req, res) {
         //if (req.query['hub.verify_token'] === app.get('verify_token')) {
