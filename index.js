@@ -24,6 +24,9 @@ app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/index.html');
 });
 
+// Expose the node_modules folder as static resources (to access socket.io.js in the browser)
+app.use('/static', express.static('node_modules'));
+
 //var server = require('http').Server(app);
 //var io = require('socket.io').listen(server);
 var server = http.createServer(app);
