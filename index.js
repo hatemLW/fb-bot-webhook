@@ -53,7 +53,7 @@ const server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-const wss = new SocketServer({ server });
+const wss = new SocketServer({ server: server, path: "/ws" });
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
@@ -91,7 +91,7 @@ var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZ
 
 app.get('/', function (req, res) {
         //res.send('It Works! Follow FB Instructions to activate.');
-	res.send("<html><body><script>	console.log(location.origin);var HOST = location.origin.replace(/^http/, 'ws');	  console.log(HOST); </script>  </body></html>"        );
+	res.send("<html><body><script>	console.log(location.origin);var HOST = location.origin.replace(/^http/, 'ws');	  console.log(HOST);var ws = new WebSocket(HOST+'/ws'); </script>  </body></html>"        );
 	console.log('new request!');
 	var host = req.get('host');
   console.log(host);
