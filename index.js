@@ -39,13 +39,13 @@ wss.on("connection", function(ws) {
 // WS
 
 
-const INDEX = path.join(__dirname, 'ws.html');
+var INDEX = path.join(__dirname, 'ws.html');
 
-const server = express()
+var server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(port, () => console.log(`Listening on ${ port }`));
 
-const wss = new WebSocketServer({ server });
+var wss = new WebSocketServer({ server });
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
