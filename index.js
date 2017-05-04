@@ -43,7 +43,7 @@ var INDEX = path.join(__dirname, 'ws.html');
 
 var server = express()
   .use(function(req, res) { res.sendFile(INDEX); })
-  .listen(port, function() { console.log(`Listening on ${ port }`);});
+  .listen(port, function() { console.log('Listening on ${ port }');});
 
 var wss = new WebSocketServer({ server });
 
