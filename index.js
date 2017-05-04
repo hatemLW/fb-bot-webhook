@@ -39,11 +39,11 @@ wss.on("connection", function(ws) {
 // WS
 
 
-var INDEX = path.join(__dirname, 'ws.html');
+var INDEX = path.join(__dirname, 'ws2.html');
 
 var server = express()
   .use(function(req, res) { res.sendFile(INDEX); })
-  .listen(port, function() { console.log('Listening on ${ port }');});
+  .listen(port, function() { console.log('Listening on port: %d', port);});
 
 var wss = new WebSocketServer({server: server});
 
