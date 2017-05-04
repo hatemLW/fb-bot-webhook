@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 
 
 var port =  5551; // WS
-app.use(express.static(__dirname + "/")); // WS
+/*app.use(express.static(__dirname + "/")); // WS
 var server = http.createServer(app); // WS
 console.log("http server creating on %d", port) // WS
 server.listen(port); // WS
@@ -35,7 +35,30 @@ wss.on("connection", function(ws) {
     console.log("websocket connection close")
     clearInterval(id)
   })
-});// WS
+});*/ 
+// WS
+
+
+const INDEX = path.join(__dirname, 'ws.html');
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(port, () => console.log(`Listening on ${ port }`));
+
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
+});
+
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
+  });
+}, 1000);
+
+
 
 //app.set('port', (process.env.APPSETTING_PORT || 5000));
 //app.set('verify_token', (process.env.APPSETTING_VERIFY_TOKEN || 'TEST'));
