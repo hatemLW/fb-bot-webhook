@@ -20,14 +20,15 @@ var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZ
 
 app.get('/', function (req, res) {
         //res.send('It Works! Follow FB Instructions to activate.');
+	console.log("Homepage");
 	res.sendfile(__dirname + '/index.html');
 });
 
 //var server = require('http').Server(app);
 //var io = require('socket.io').listen(server);
-
-var server = require('http').createServer(app);  
-var io = require('socket.io')(server);
+var server = http.createServer(app);
+//var server = require('http').createServer(app);  
+var io = require('socket.io').listen(server);
 
 server.listen(80);
 
