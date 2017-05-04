@@ -2,11 +2,16 @@
 //var WebSocketServer = require("ws").server
 //var socketIO = require('socket.io');
 //const express = require('express');
-var WebSocketServer = require("ws").Server; // WS
-var http = require("http"); // WS
-var path = require('path'); // WS
+//var WebSocketServer = require("ws").Server; // WS
+//var http = require("http"); // WS
+//var path = require('path'); // WS
 
-var express = require('express');
+const express = require('express');
+const SocketServer = require('ws').Server;
+const path = require('path');
+
+
+//var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -39,21 +44,24 @@ wss.on("connection", function(ws) {
 // WS
 
 
-var INDEX = path.join(__dirname, 'ws2.html');
 
-var server = express()
-  .use(function(req, res) { res.sendFile(INDEX); })
-  .listen(port, function() { console.log('Listening on port: %d', port);});
+//const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+const INDEX = path.join(__dirname, 'index.html');
 
-var wss = new WebSocketServer({server: server});
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-wss.on('connection', function(ws) {
+const wss = new SocketServer({ server });
+
+wss.on('connection', (ws) => {
   console.log('Client connected');
-  ws.on('close', function() { console.log('Client disconnected');});
+  ws.on('close', () => console.log('Client disconnected'));
 });
 
-setInterval(function() {
-  wss.clients.forEach(function(client) {
+setInterval(() => {
+  wss.clients.forEach((client) => {
     client.send(new Date().toTimeString());
   });
 }, 1000);
