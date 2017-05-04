@@ -8,13 +8,15 @@
   },
   "dependencies": {
     "body-parser": "1.15.0",
-    "ejs": "2.3.3",
-    "express": "4.13.3",
+    "ejs": "2.3.3", 
     "request": "2.71.0",
-    "ws": "0.4.x"
+    "bufferutil": "1.2.1",
+    "express": "4.13.4",
+    "utf-8-validate": "1.2.1",
+    "ws": "1.1.0"
   },
   "engines": {
-    "node": "0.12.6"
+    "node": "6.2.0"
   },
   "repository": {
     "type": "git",
