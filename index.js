@@ -7,20 +7,31 @@
 //var path = require('path'); // WS
 
 const express = require('express');
-const enableWs = require('express-ws');
-const SocketServer = require('ws').Server;
+var io = require('socket.io');
+//const enableWs = require('express-ws');
+//const SocketServer = require('ws').Server;
 const path = require('path');
 
 
 //var express = require('express');
 var app = express();
-enableWs(app);
+//enableWs(app);
 var bodyParser = require('body-parser');
 var request = require('request');
 //var changeCase = require('change-case');
 
 app.use(bodyParser.json());
 
+var server = http.createServer(app).listen(3333, function() {
+    console.log('Express server listening on port ' + 3333);
+});
+
+// let socket.IO listen on the server
+io = io.listen(server);
+
+io.on('connection', function(socket) { 
+	console.log('new ws');
+});
 
 //var port =  5551; // WS
 /*app.use(express.static(__dirname + "/")); // WS
@@ -89,7 +100,7 @@ var PAGE_ACCESS_TOKEN = 'EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itW
 var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFoEZCWFpKvRAhFoqZAZC9cD4BfLjHAU603wBBtq0b4D7UT7ZBkIyH732vDf54ZCCmV1KuSb3bO9BvLuAGeKxj75lrYlk7v5KhkkiBtq2hFTkZD';
 var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
 
-app.ws('/echo', (ws, req) => {
+/*app.ws('/echo', (ws, req) => {
     ws.on('message', msg => {
 	     console.log('WebSocket new client');
 		ws.send(msg);
@@ -99,7 +110,7 @@ app.ws('/echo', (ws, req) => {
         console.log('WebSocket was closed');
     });
 });
-
+*/
 app.get('/', function (req, res) {
         res.send('It Works! Follow FB Instructions to activate.');
 	/*res.send("<html><body><script>	console.log(location.origin);var HOST = location.origin.replace(/^http/, 'ws');	  console.log(HOST);var ws = new WebSocket(HOST+'/ws'); </script>  </body></html>"        );
