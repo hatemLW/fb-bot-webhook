@@ -45,7 +45,7 @@ var server = express()
   .use(function(req, res) { res.sendFile(INDEX); })
   .listen(port, function() { console.log('Listening on ${ port }');});
 
-var wss = new WebSocketServer({ server });
+var wss = new WebSocketServer({server: server});
 
 wss.on('connection', function(ws) {
   console.log('Client connected');
@@ -53,7 +53,7 @@ wss.on('connection', function(ws) {
 });
 
 setInterval(function() {
-  wss.clients.forEach((client) => {
+  wss.clients.forEach(function(client) {
     client.send(new Date().toTimeString());
   });
 }, 1000);
