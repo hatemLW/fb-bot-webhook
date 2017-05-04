@@ -42,17 +42,17 @@ wss.on("connection", function(ws) {
 var INDEX = path.join(__dirname, 'ws.html');
 
 var server = express()
-  .use((req, res) => res.sendFile(INDEX) )
-  .listen(port, () => console.log(`Listening on ${ port }`));
+  .use(function(req, res) { res.sendFile(INDEX); })
+  .listen(port, function() { console.log(`Listening on ${ port }`);});
 
 var wss = new WebSocketServer({ server });
 
-wss.on('connection', (ws) => {
+wss.on('connection', function(ws) {
   console.log('Client connected');
-  ws.on('close', () => console.log('Client disconnected'));
+  ws.on('close', function() { console.log('Client disconnected');});
 });
 
-setInterval(() => {
+setInterval(function() {
   wss.clients.forEach((client) => {
     client.send(new Date().toTimeString());
   });
