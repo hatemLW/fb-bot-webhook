@@ -5,6 +5,7 @@
       var HOST = location.origin.replace(/^http/, 'ws')
       console.log(HOST);
       var ws = new WebSocket(HOST);
+      var ws2 = new WebSocket(HOST+'/public');
       var el = document.getElementById('server-time');
       ws.onmessage = function (event) {
         el.innerHTML = 'Server time: ' + event.data;
