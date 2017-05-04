@@ -2,7 +2,7 @@
 var http = require("http"); // WS
 
 var express = require('express');
-var io = require('socket.io');
+//var io = require('socket.io');
 const path = require('path');
 
 var app = express();
@@ -23,11 +23,14 @@ app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/index.html');
 });
 
-var server = require('http').Server(app);
-var io1 = require('socket.io');
-var io= io1(server);
+//var server = require('http').Server(app);
+//var io = require('socket.io').listen(server);
+
+var server = require('http').createServer(app);  
+var io = require('socket.io')(server);
 
 server.listen(80);
+
 io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
