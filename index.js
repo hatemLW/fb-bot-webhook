@@ -88,7 +88,7 @@ var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFo
 var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
 
 
-
+/*
 app.get('/', function (req, res) {
         res.send('It Works! Follow FB Instructions to activate.');
         console.log('new request!');
@@ -97,7 +97,7 @@ app.get('/', function (req, res) {
 	var origin = req.get('origin');
  // var HOST = location.origin.replace(/^http/, 'ws');
 	  console.log(origin);
-});
+});*/
 
 app.get('/webhook', function (req, res) {
         //if (req.query['hub.verify_token'] === app.get('verify_token')) {
