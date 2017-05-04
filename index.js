@@ -24,7 +24,8 @@ app.get('/', function (req, res) {
 });
 
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var io1 = require('socket.io');
+var io= io1(server);
 
 server.listen(80);
 io.on('connection', function (socket) {
