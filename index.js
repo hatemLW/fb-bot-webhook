@@ -7,12 +7,14 @@
 //var path = require('path'); // WS
 
 const express = require('express');
+const enableWs = require('express-ws');
 const SocketServer = require('ws').Server;
 const path = require('path');
 
 
 //var express = require('express');
 var app = express();
+enableWs(app);
 var bodyParser = require('body-parser');
 var request = require('request');
 //var changeCase = require('change-case');
@@ -20,7 +22,7 @@ var request = require('request');
 app.use(bodyParser.json());
 
 
-var port =  5551; // WS
+//var port =  5551; // WS
 /*app.use(express.static(__dirname + "/")); // WS
 var server = http.createServer(app); // WS
 console.log("http server creating on %d", port) // WS
@@ -46,7 +48,7 @@ wss.on("connection", function(ws) {
 
 
 //const PORT = process.env.PORT || 3000;
-const PORT = 3000;
+/*const PORT = 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
 const server = express()
@@ -66,7 +68,7 @@ setInterval(() => {
   });
 }, 1000);
 
-
+*/
 
 //app.set('port', (process.env.APPSETTING_PORT || 5000));
 //app.set('verify_token', (process.env.APPSETTING_VERIFY_TOKEN || 'TEST'));
@@ -87,17 +89,26 @@ var PAGE_ACCESS_TOKEN = 'EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itW
 var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFoEZCWFpKvRAhFoqZAZC9cD4BfLjHAU603wBBtq0b4D7UT7ZBkIyH732vDf54ZCCmV1KuSb3bO9BvLuAGeKxj75lrYlk7v5KhkkiBtq2hFTkZD';
 var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
 
+app.ws('/echo', (ws, req) => {
+    ws.on('message', msg => {
+	     console.log('WebSocket new client');
+		ws.send(msg);
+    });
 
+    ws.on('close', () => {
+        console.log('WebSocket was closed');
+    });
+});
 
 app.get('/', function (req, res) {
-        //res.send('It Works! Follow FB Instructions to activate.');
-	res.send("<html><body><script>	console.log(location.origin);var HOST = location.origin.replace(/^http/, 'ws');	  console.log(HOST);var ws = new WebSocket(HOST+'/ws'); </script>  </body></html>"        );
+        res.send('It Works! Follow FB Instructions to activate.');
+	/*res.send("<html><body><script>	console.log(location.origin);var HOST = location.origin.replace(/^http/, 'ws');	  console.log(HOST);var ws = new WebSocket(HOST+'/ws'); </script>  </body></html>"        );
 	console.log('new request!');
 	var host = req.get('host');
   console.log(host);
 	var origin = req.get('origin');
  // var HOST = location.origin.replace(/^http/, 'ws');
-	  console.log(origin);
+	  console.log(origin);*/
 });
 
 app.get('/webhook', function (req, res) {
