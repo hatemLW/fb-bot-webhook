@@ -55,7 +55,7 @@ app.post('/webhook/', function (req, res) {
 		
                 // console.log('messaging_events:...');
    var messaging_events = req.body.entry[0].messaging;
-	 if(ws_openned)
+	 if (ws.readyState === WebSocket.OPEN)
 			 ws.send(JSON.stringify(messaging_events));	 
      console.log(JSON.stringify(messaging_events));
             for (i = 0; i < messaging_events.length; i++) {
