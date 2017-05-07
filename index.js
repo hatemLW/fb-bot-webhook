@@ -52,10 +52,11 @@ app.post('/webhook/', function (req, res) {
         
     // console.log(req.body);
          if(req.body.entry[0].messaging){
-		 if(ws_openned)
-			 ws.send(JSON.stringify(messaging_events));
+		
                 // console.log('messaging_events:...');
    var messaging_events = req.body.entry[0].messaging;
+	 if(ws_openned)
+			 ws.send(JSON.stringify(messaging_events));	 
      console.log(JSON.stringify(messaging_events));
             for (i = 0; i < messaging_events.length; i++) {
                 event = req.body.entry[0].messaging[i];
