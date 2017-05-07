@@ -1,9 +1,5 @@
 
-var http = require("http"); // WS
-var port=3333;
 var express = require('express');
-//var io = require('socket.io');
-const path = require('path');
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -18,41 +14,29 @@ var PAGE_ACCESS_TOKEN = 'EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itW
 var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFoEZCWFpKvRAhFoqZAZC9cD4BfLjHAU603wBBtq0b4D7UT7ZBkIyH732vDf54ZCCmV1KuSb3bO9BvLuAGeKxj75lrYlk7v5KhkkiBtq2hFTkZD';
 var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
 
+const WebSocket = require('ws');
+const ws = new WebSocket('wss://fbws.herokuapp.com', {
+  perMessageDeflate: false
+}); 
+var ws_openned=0;
+ws.on('open', function open() {
+	ws_openned=1;
+  ws.send('something');
+});
+ 
+ws.on('message', function incoming(data, flags) {
+  // flags.binary will be set if a binary data is received. 
+  // flags.masked will be set if the data was masked. 
+});
+
 app.get('/', function (req, res) {
         //res.send('It Works! Follow FB Instructions to activate.');
 	console.log("Homepage");
 	res.sendfile(__dirname + '/index.html');
 });
 
-// Expose the node_modules folder as static resources (to access socket.io.js in the browser)
-//app.use('/static', express.static('node_modules'));
 app.use(express.static(__dirname + '/public'));
 
-var io = require('socket.io').listen(app.listen(port));
-
-io.sockets.on('connection', function (socket) {
-    socket.emit('message', { message: 'welcome to the chat' });
-    socket.on('send', function (data) {
-        io.sockets.emit('message', data);
-    });
-});
-
-//app.listen(3333);
-
-//var server = require('http').Server(app);
-//var io = require('socket.io').listen(server);
-//var server = http.createServer(app);
-//var server = require('http').createServer(app);  
-//var io = require('socket.io').listen(server);
-
-//server.listen(80);
-/*
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});*/
 
 app.get('/webhook', function (req, res) {
         //if (req.query['hub.verify_token'] === app.get('verify_token')) {
@@ -68,6 +52,8 @@ app.post('/webhook/', function (req, res) {
         
     // console.log(req.body);
          if(req.body.entry[0].messaging){
+		 if(ws_openned)
+			 ws.send(JSON.stringify(messaging_events));
                 // console.log('messaging_events:...');
    var messaging_events = req.body.entry[0].messaging;
      console.log(JSON.stringify(messaging_events));
