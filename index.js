@@ -13,14 +13,16 @@ app.set('page_access_token', (process.env.PAGE_ACCESS_TOKEN || 'NULL'));
 var PAGE_ACCESS_TOKEN = 'EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itWtBAAlTVdb8vaPQU7WXnV7Pgw41iZCvUw0nJv6lZA4JV2j1bvpZBxZBkSApXZA0fJ0gS3ckLZAS5MXIFXOKLyakZCXK2FRYacMZC139NYY5Ncfo6ZAoVEyvZALTY1XF3lF2ZCU';
 var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFoEZCWFpKvRAhFoqZAZC9cD4BfLjHAU603wBBtq0b4D7UT7ZBkIyH732vDf54ZCCmV1KuSb3bO9BvLuAGeKxj75lrYlk7v5KhkkiBtq2hFTkZD';
 var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
-
+console.log("ws creating...");
 const WebSocket = require('ws');
 const ws = new WebSocket('wss://fbws.herokuapp.com', {
   perMessageDeflate: false
 }); 
+
 var ws_openned=0;
 ws.on('open', function open() {
 	ws_openned=1;
+	console.log("ws openned.");
   ws.send('something');
 });
  
@@ -28,7 +30,11 @@ ws.on('message', function incoming(data, flags) {
   // flags.binary will be set if a binary data is received. 
   // flags.masked will be set if the data was masked. 
 });
-
+ws.on('close', function close() {
+	ws_openned=0; 
+	console.log("ws closed.");
+});
+ 
 app.get('/', function (req, res) {
         //res.send('It Works! Follow FB Instructions to activate.');
 	console.log("Homepage");
@@ -56,7 +62,11 @@ app.post('/webhook/', function (req, res) {
                 // console.log('messaging_events:...');
    var messaging_events = req.body.entry[0].messaging;
 	 if (ws.readyState === WebSocket.OPEN)
-			 ws.send(JSON.stringify(messaging_events));	 
+	 {
+		 console.log("ws sending...");
+		 ws.send(JSON.stringify(messaging_events));	 		 
+		 console.log("ws sent.");
+	 }
      console.log(JSON.stringify(messaging_events));
             for (i = 0; i < messaging_events.length; i++) {
                 event = req.body.entry[0].messaging[i];
