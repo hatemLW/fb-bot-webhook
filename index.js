@@ -64,12 +64,12 @@ app.post('/webhook/', function (req, res) {
 		
                 // console.log('messaging_events:...');
    var messaging_events = req.body.entry[0].messaging;
-	 if (ws.readyState === WebSocket.OPEN)
+	/* if (ws.readyState === WebSocket.OPEN)
 	 {
 		 console.log("ws sending...");
 		 ws.send(JSON.stringify(messaging_events));	 		 
 		 console.log("ws sent.");
-	 }
+	 }*/
      console.log(JSON.stringify(messaging_events));
             for (i = 0; i < messaging_events.length; i++) {
                 event = req.body.entry[0].messaging[i];
@@ -81,6 +81,12 @@ app.post('/webhook/', function (req, res) {
                     //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
 			
                     		sendTextMessage(sender,  text.substring(0, 200));
+			 if (ws.readyState === WebSocket.OPEN)
+			 {
+				 console.log("ws sending...");
+				 ws.send(JSON.stringify(event));	 		 
+				 console.log("ws sent.");
+			 }
                 }
                    // if(event)
                    //    console.log (event.toString());
