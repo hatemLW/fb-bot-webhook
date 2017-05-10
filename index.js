@@ -15,7 +15,7 @@ var PAGE_ACCESS_TOKEN2= 'EAAOlPqyA6G8BAKcCAY5v8sdb6Ou0etYuMVo1wFwtVSMeqpyVYVMMFo
 var PAGE_ACCESS_TOKEN3= 'EAAOlPqyA6G8BAEDb2ZBfjMt46tvKdrOFdWEu2l7Ec8PXFgmxCMZAuZBFQ64lKsscNqHHlglnIOkWZA1u4ElEDADRjHog6YSfmZCjGaZCsqg4unCPeljoU9WSupHIWZBP531P65RHiLmLN5tvONZC3LQFe0OwJePxkDfqwDqQUrQoorQWOnBMp2SLAWsA3l42HHcZD';
 console.log("ws creating...");
 const WebSocket = require('ws');
-const ws = new WebSocket('wss://fbws.herokuapp.com', {
+var ws = new WebSocket('wss://fbws.herokuapp.com', {
   perMessageDeflate: false
 }); 
 
