@@ -33,6 +33,9 @@ ws.on('message', function incoming(data, flags) {
 ws.on('close', function close() {
 	ws_openned=0; 
 	console.log("ws closed.");
+	ws = new WebSocket('wss://fbws.herokuapp.com', {
+  		perMessageDeflate: false
+	}); 
 });
  
 app.get('/', function (req, res) {
