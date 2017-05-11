@@ -22,13 +22,14 @@ var ws = new WebSocket('wss://fbws.herokuapp.com', {
 var ws_openned=0;
 ws.on('open', function open() {
 	ws_openned=1;
-	console.log("ws openned.");
-  ws.send('something');
+	console.log("lwFB.ChatBot Starting.");
+  ws.send('lwFB.ChatBot Starting.');
 });
  
 ws.on('message', function incoming(data, flags) {
   // flags.binary will be set if a binary data is received. 
   // flags.masked will be set if the data was masked. 
+	console.log('new ws msg='+data + ' , with flags= ' + flags);
 });
 ws.on('close', function close() {
 	ws_openned=0; 
