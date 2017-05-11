@@ -45,7 +45,9 @@ function wsCreate()
 	if (ws.readyState != WebSocket.OPEN)
 		ws = new WebSocket(wsStr, { perMessageDeflate: false }); 
 }
- 
+
+setInterval(function() { wsCreate();} , 5000);
+
 app.get('/', function (req, res) {
         //res.send('It Works! Follow FB Instructions to activate.');
 	console.log("Homepage");
@@ -239,6 +241,3 @@ function receivedMessage(event) {
   // Putting a stub for now, we'll expand it in the following steps
   //console.log("Message data: ", event.message);
 }
-setInterval(() => {
-  wsCreate();
-}, 5000);
