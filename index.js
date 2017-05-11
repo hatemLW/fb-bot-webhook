@@ -37,7 +37,7 @@ ws.on('message', function incoming(data, flags) {
 ws.on('close', function close() {
 	ws_openned=0; 
 	console.log("ws closed.");
-	wsCreate();
+	setTimeout(function(){ wsCreate();},1000);
 });
 
 function wsCreate()
@@ -97,6 +97,10 @@ app.post('/webhook/', function (req, res) {
 				 ws.send(JSON.stringify(event));	 		 
 				 console.log("ws sent.");
 			 }
+			else
+			{
+				setTimeout(function(){ wsCreate();},1000);
+			}
                 }
                    // if(event)
                    //    console.log (event.toString());
