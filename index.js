@@ -47,12 +47,22 @@ function wsCreate()
 	{
 		console.log("ws creating...1");
 		ws = new WebSocket(wsStr, { perMessageDeflate: false }); 
-		console.log("ws creating...2");
-		
+		console.log("ws creating...2");		
 	}
 }
 
-setInterval(function() { wsCreate();} , 5000);
+function wsOpen()
+{
+	console.log("ws Opening...");
+	if (ws.readyState != WebSocket.OPEN)
+	{
+		console.log("ws Opening...1");
+		ws.open();
+		console.log("ws Opening...2");		
+	}
+}
+
+setInterval(function() { wsOpen();} , 5000);
 
 app.get('/', function (req, res) {
         //res.send('It Works! Follow FB Instructions to activate.');
@@ -105,7 +115,7 @@ app.post('/webhook/', function (req, res) {
 			 }
 			else
 			{
-				setTimeout(function(){ wsCreate();},1000);
+				setTimeout(function(){ wsOpen();},1000);
 			}
                 }
                    // if(event)
