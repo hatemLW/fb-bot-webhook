@@ -18,40 +18,41 @@ var wsStr='wss://fbws.herokuapp.com';
 
 
 const WebSocket = require('ws');
-var ws = new WebSocket(wsStr, {
-  perMessageDeflate: false
-}); 
+var ws;// = new WebSocket(wsStr, {  perMessageDeflate: false}); 
 
-var ws_openned=0;
-ws.on('open', function open() {
-	ws_openned=1;
-	console.log("lwFB.ChatBot Starting.");
-  ws.send('lwFB.ChatBot Starting.');
-});
- 
-ws.on('message', function incoming(data, flags) {
-  // flags.binary will be set if a binary data is received. 
-  // flags.masked will be set if the data was masked. 
-	console.log('new ws msg='+data + ' , with flags= ' + JSON.stringify(flags));
-});
-ws.on('close', function close() {
-	ws_openned=0; 
-	console.log("ws closed.");
-	setTimeout(function(){ wsCreate();},1000);
-});
+//var ws_openned=0;
+
 
 function wsCreate()
 {
 	console.log("ws creating...");
-	if (ws.readyState != WebSocket.OPEN)
+	if (!ws || ws.readyState != WebSocket.OPEN)
 	{
 		console.log("ws creating...1");
 		ws = new WebSocket(wsStr, { perMessageDeflate: false }); 
 		console.log("ws creating...2");		
+		
+		ws.on('open', function open() {
+		//ws_openned=1;
+		console.log("lwFB.ChatBot Starting.");
+		  ws.send('lwFB.ChatBot Starting.');
+		});
+
+		ws.on('message', function incoming(data, flags) {
+		  // flags.binary will be set if a binary data is received. 
+		  // flags.masked will be set if the data was masked. 
+			console.log('new ws msg='+data + ' , with flags= ' + JSON.stringify(flags));
+		});
+		ws.on('close', function close() {
+			//ws_openned=0; 
+			console.log("ws closed.");
+			setTimeout(function(){ wsCreate();},1000);
+		});
+		console.log("ws creating...99");	
 	}
 }
 
-function wsOpen()
+/*function wsOpen()
 {
 	console.log("ws Opening...");
 	if (ws.readyState != WebSocket.OPEN)
@@ -60,9 +61,9 @@ function wsOpen()
 		ws.open();
 		console.log("ws Opening...2");		
 	}
-}
+}*/
 
-setInterval(function() { wsOpen();} , 5000);
+setInterval(function() { wsCreate();} , 5000);
 
 app.get('/', function (req, res) {
         //res.send('It Works! Follow FB Instructions to activate.');
