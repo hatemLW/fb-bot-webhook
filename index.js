@@ -29,7 +29,7 @@ ws.on('open', function open() {
 ws.on('message', function incoming(data, flags) {
   // flags.binary will be set if a binary data is received. 
   // flags.masked will be set if the data was masked. 
-	console.log('new ws msg='+data + ' , with flags= ' + flags);
+	console.log('new ws msg='+data + ' , with flags= ' + JSON.stringify(flags));
 });
 ws.on('close', function close() {
 	ws_openned=0; 
