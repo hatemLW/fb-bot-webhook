@@ -16,7 +16,7 @@ var PAGE_ACCESS_TOKEN = 'EAAOlPqyA6G8BACwqDoewkvsQCUtimjsbIbCpl7CeuDhhABJNb20itW
 
 var wsStr='wss://fbws.herokuapp.com';
 
-console.log("ws creating...");
+
 const WebSocket = require('ws');
 var ws = new WebSocket(wsStr, {
   perMessageDeflate: false
@@ -42,8 +42,14 @@ ws.on('close', function close() {
 
 function wsCreate()
 {
+	console.log("ws creating...");
 	if (ws.readyState != WebSocket.OPEN)
+	{
+		console.log("ws creating...1");
 		ws = new WebSocket(wsStr, { perMessageDeflate: false }); 
+		console.log("ws creating...2");
+		
+	}
 }
 
 setInterval(function() { wsCreate();} , 5000);
