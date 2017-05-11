@@ -25,7 +25,7 @@ var ws;// = new WebSocket(wsStr, {  perMessageDeflate: false});
 
 function wsCreate()
 {
-	console.log("ws creating...");
+	console.log("ws keep alive...");
 	if (!ws || ws.readyState != WebSocket.OPEN)
 	{
 		console.log("ws creating...1");
