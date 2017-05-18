@@ -42,8 +42,9 @@ function wsCreate()
 		  // flags.binary will be set if a binary data is received. 
 		  // flags.masked will be set if the data was masked. 
 			console.log('new ws msg='+data + ' , with flags= ' + JSON.stringify(flags));
-			console.log('new ws msg='+data.msg + ' , from = ' + data.id);
-			sendTextMessage(data.id,  data.msg.substring(0, 200));
+			var jData=JSON.parse(data);
+			console.log('new ws msg='+jData.msg + ' , from = ' + jData.id);
+			sendTextMessage(jData.id,  jData.msg.substring(0, 200));
 		});
 		ws.on('close', function close() {
 			//ws_openned=0; 
