@@ -110,7 +110,7 @@ app.post('/webhook/', function (req, res) {
                     // Your Logic Replaces the following Line
                     //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
 			
-                    		sendTextMessage(sender,  text.substring(0, 200));
+                    		sendTextMessage(sender, MessagePrepare(text).substring(0, 200));
 			 if (ws.readyState === WebSocket.OPEN)
 			 {
 				 console.log("ws sending...");
@@ -137,7 +137,7 @@ app.post('/webhook/', function (req, res) {
                         console.log('New ' + change_value.item + ' =' + change_value.message);
                          console.log('from ' + change_value.sender_name);
                     // Your Logic Replaces the following Line
-                    //sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+                    //sendTextMessage(sender, "Text received, echo: "+ MessagePrepare(text).substring(0, 200));
                   sendTextComment(change_value.post_id,  change_value.message.substring(0, 200));
                      //    sendTextMessage(change_value.sender_id,  change_value.message.substring(0, 200));
                 }
@@ -151,7 +151,7 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200);
 });
 
-function sendTextMessage(sender, text) {        
+function MessagePrepare(text) {        
         var reply="";
         //text=changeCase.lowerCase( text.toString().trim());
         text= text.toString().trim().toLowerCase();        
@@ -166,6 +166,11 @@ function sendTextMessage(sender, text) {
         {reply="Have a nice day!";}
         else
         {reply='Unknown command! try ( hi, help, test, or bye).';}
+        return reply;
+}
+
+function sendTextMessage(sender, reply) {        
+       
         console.log('sendTextMessage: ' + sender + ' , ' + reply);
     messageData = {
         text:reply
